@@ -20,8 +20,11 @@ public:
      QRectF boundingRect() const;
      void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int referencia_Y(int y, int max);
-    int max_=560;
 
+
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -30,6 +33,11 @@ private:
     QGraphicsRectItem *baseCanionOfensivo;
     QGraphicsEllipseItem *canionDefensivo;
     QGraphicsEllipseItem *canionOfensivo;
+    qreal Ho;
+    qreal Hd;
+    qreal Xd;
+    int max_=560;
+    bool reinicio=false;
 
 
 };
