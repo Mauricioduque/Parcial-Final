@@ -82,29 +82,14 @@ void MainWindow::on_pushButton_clicked()
 
     reinicio=true;
 
-    bala=new disparosOfensivos(Ro,max_);
-    bala->setPos(0,referencia_Y(Hd,max_));
-    scene->update();
-    scene-> addItem(bala);
-
-
 }
 
 
 
-
-
-//QRectF MainWindow::boundingRect() const {
-
-//    return QRectF(0,0,50,50);
-//}
-
-//void MainWindow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-
-//    painter->setBrush(Qt::green);
-//    painter->drawEllipse(boundingRect());
-//    Q_UNUSED(widget)
-//    Q_UNUSED(option)
-//}
-
-
+void MainWindow::on_pushButton_2_clicked()
+{
+    bala=new disparosOfensivos(Ro,Xd,Hd,referencia_Y(Ho,max_));
+    bala->setPos(0,referencia_Y(Ho,max_));
+    scene->update();
+    scene-> addItem(bala);
+}

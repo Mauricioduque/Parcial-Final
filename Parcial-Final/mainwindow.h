@@ -26,6 +26,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
@@ -36,12 +38,12 @@ private:
     QGraphicsEllipseItem *vulnerableDefensivo;
     QGraphicsEllipseItem *vulnerableOfensivo;
     disparosOfensivos *bala;
-    qreal Ho;
-    qreal Hd;
-    qreal Xd;
+    float Ho;
+    float Hd;
+    float Xd;
     int max_=560;
-    qreal Rd;
-    qreal Ro;
+    float Rd;
+    float Ro;
     bool reinicio=false;
 
 
