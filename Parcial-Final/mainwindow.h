@@ -5,7 +5,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPainter>
-
+#include "disparosofensivos.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -35,6 +35,7 @@ private:
     QGraphicsEllipseItem *canionOfensivo;
     QGraphicsEllipseItem *vulnerableDefensivo;
     QGraphicsEllipseItem *vulnerableOfensivo;
+    disparosOfensivos *bala;
     qreal Ho;
     qreal Hd;
     qreal Xd;
