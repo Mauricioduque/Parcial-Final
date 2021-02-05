@@ -33,10 +33,14 @@ private:
     QGraphicsRectItem *baseCanionOfensivo;
     QGraphicsEllipseItem *canionDefensivo;
     QGraphicsEllipseItem *canionOfensivo;
+    QGraphicsEllipseItem *vulnerableDefensivo;
+    QGraphicsEllipseItem *vulnerableOfensivo;
     qreal Ho;
     qreal Hd;
     qreal Xd;
     int max_=560;
+    qreal Rd;
+    qreal Ro;
     bool reinicio=false;
 
 

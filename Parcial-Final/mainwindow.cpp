@@ -34,14 +34,19 @@ void MainWindow::on_pushButton_clicked()
         delete baseCanionOfensivo;
         delete canionDefensivo;
         delete canionOfensivo;
+        delete vulnerableDefensivo;
+        delete vulnerableOfensivo;
     };
 
     //Se obtiene los valores de los doubleSpinbox
     Ho=ui->Ho->value();
     Hd=ui->Hd->value();
     Xd=ui->Xd->value();
+    Rd=0.025*Xd;
+    Ro=0.05*Xd;
 
-    // Apartir de losdatos ingresados se grafica el frente de batalla
+//------------- Apartir de los datos ingresados se grafica el frente de batalla-----------
+    //altura de los cañones
     baseCanionDefensivo=new QGraphicsRectItem;
     baseCanionDefensivo->setRect(Xd,referencia_Y(Hd-50,max_),50,Hd-50);
     scene-> addItem(baseCanionDefensivo);
@@ -50,13 +55,29 @@ void MainWindow::on_pushButton_clicked()
     baseCanionOfensivo->setRect(0,referencia_Y(Ho-50,max_),50,Ho-50);
     scene-> addItem(baseCanionOfensivo);
 
+    //cañones
     canionOfensivo=new QGraphicsEllipseItem;
     canionOfensivo->setRect(0,referencia_Y(Ho,max_),50,50);
+    canionOfensivo->setBrush(Qt::blue);
     scene-> addItem(canionOfensivo);
 
     canionDefensivo=new QGraphicsEllipseItem;
     canionDefensivo->setRect(Xd,referencia_Y(Hd,max_),50,50);
+    canionDefensivo->setBrush(Qt::green);
     scene-> addItem(canionDefensivo);
+
+    //regiones de vulnerabilidad de cada cañon
+    vulnerableOfensivo=new QGraphicsEllipseItem;
+    vulnerableOfensivo->setRect(-(Rd),referencia_Y(Ho+Rd,max_),2*(Rd+25),2*(Rd+25));
+    QPen pen(Qt::red, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin);
+    vulnerableOfensivo->setPen(pen);
+    scene-> addItem(vulnerableOfensivo);
+
+    vulnerableDefensivo=new QGraphicsEllipseItem;
+    vulnerableDefensivo->setRect(Xd-Ro,referencia_Y(Hd+Ro,max_),2*(Ro+25),2*(Ro+25));
+    QPen pen1(Qt::red, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin);
+    vulnerableDefensivo->setPen(pen1);
+    scene-> addItem(vulnerableDefensivo);
 
     reinicio=true;
 
