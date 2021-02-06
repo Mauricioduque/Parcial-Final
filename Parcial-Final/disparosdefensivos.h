@@ -7,6 +7,8 @@
 #include <iostream>
 #include <QTimer>
 #include <QThread>
+#include <QGraphicsScene>
+
 
 using namespace std;
 
@@ -14,7 +16,7 @@ class disparosDefensivos :public QObject,public QGraphicsItem
 {
     Q_OBJECT
 public:
-    disparosDefensivos(float rdetonacion,float Xd,float Hd,float Ho);
+    disparosDefensivos(float rdetonacion,float Xd,float Hd,float Ho,QGraphicsItem *parent= nullptr);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,QWidget *widget);
     void disDefensivos();
@@ -36,8 +38,12 @@ private:
     float Vx,Vy;
     float  T=0.05;
     float x,y;
-
     int direccion;
+    int cont=0;
+    QPixmap sprite;
+    QPixmap sprite1;
+    QPixmap sprite2;
+    int posSprite;
 };
 
 #endif // DISPAROSDEFENSIVOS_H

@@ -1,6 +1,6 @@
 #include "disparosdefensivos.h"
 
-disparosDefensivos::disparosDefensivos(float rdetonacion,float Xd,float Hd,float Ho)
+disparosDefensivos::disparosDefensivos(float rdetonacion,float Xd,float Hd,float Ho,QGraphicsItem *parent): QGraphicsItem(parent)
 {
     x=Xd;
     y=Hd;
@@ -9,6 +9,10 @@ disparosDefensivos::disparosDefensivos(float rdetonacion,float Xd,float Hd,float
     Xd_=Xd;
     Hd_=Hd;
     Ho_=Ho;
+    setFlag(ItemClipsToShape);
+    sprite=QPixmap(":/imagenes/bala.png");
+    sprite1=sprite.scaledToHeight(2*r);
+    sprite2=sprite1.scaledToWidth(2*r);
     disDefensivos();
     Vx=vels[0];
     w=angs[0]*(pi/180);
@@ -24,15 +28,15 @@ disparosDefensivos::disparosDefensivos(float rdetonacion,float Xd,float Hd,float
 
 QRectF disparosDefensivos::boundingRect() const
 {
-    return QRectF(-4,-4,8,8);
+    return QRectF(0,0,2*r,2*r);
 }
 
 
 //Se grafica la bala y el sensor ofensivo
 void disparosDefensivos::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(boundingRect().center(),r,r);
+    painter->drawPixmap(0,0, sprite2, posSprite, 0,2*r, 2*r);
+    setTransformOriginPoint(boundingRect().center());
     Q_UNUSED(widget)
     Q_UNUSED(option)
 }
@@ -45,13 +49,15 @@ void  disparosDefensivos::disDefensivos()
     int V0=0,Vini=5;
     for (V0=Vini;V0<=400;V0+=4){
         for (int angle=0;angle<90;angle++){
-            for (int t=0;;t++){
+            for (int t=2;;t++){
                 //Calculo de las velocidades en X y Y de la bala defensiva
                 Vxini=V0*cos((angle)*pi/180);
                 Vyini=V0*sin((angle)*pi/180);
                 //Calculo de las posiciones en X y Y de la bala defensiva
-                x=Xd_-Vxini*t;
-                y=Hd_+ Vyini*t-(0.5*G*t*t);
+                x=Xd_-Vxini*(t-2);
+                y=Hd_+ Vyini*(t-2)-(0.5*G*(t-2)*(t-2));
+//                x=Xd_-Vxini*t;
+//                y=Hd_+ Vyini*t-(0.5*G*t*t);
                 //Se verifica la condicion de impacto sobre el cañon ofensivo
                 if(sqrt(pow((0-x),2)+pow((Ho_-y),2))<=r){
                     if(y<0) y=0;
@@ -81,10 +87,16 @@ void disparosDefensivos::generar_Defensivos()
      //Y(t)=y(t-1)+v(t-1)*T-g/2*T*T
      //V(t)=V(t-1)-g*T
 
-   y=y+Vy*t+(0.5*G*t*t); //tener en cuenta Vy y Vx para el angulo de disp
+   y=y+Vy*t-(0.5*G*t*t); //tener en cuenta Vy y Vx para el angulo de disp
    Vy=Vy+G*t;
    x=x+Vx*t*direccion;
    setPos(x,y);
+   cont++;
+   if(cont%3==0){
+       scene()->addEllipse(x,y,2*r,2*r);
+
+   }
+
 
 
 }
