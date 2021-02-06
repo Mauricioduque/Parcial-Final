@@ -102,7 +102,7 @@ void MainWindow::on_pushButton_3_clicked()
     scene-> addItem(bala);
 
 
-    balaDe=new disparosDefensivos(Rd,Xd,referencia_Y(Hd,max_),Ho);
+    balaDe=new disparosDefensivos(Rd,Xd,referencia_Y(Hd,max_),Ho,2);
     balaDe->setPos(Xd,referencia_Y(Hd,max_));
     scene->update();
     scene-> addItem(balaDe);
@@ -116,4 +116,23 @@ void MainWindow::on_pushButton_4_clicked()
     scene = new QGraphicsScene;
     scene->setSceneRect(0,0,ui->graphicsView->width()-10,ui->graphicsView->height()-10);
     ui->graphicsView->setScene(scene);
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    vi=ui->vini->value();
+    ang=ui->angle->value();
+
+    bala=new disparosOfensivos(Ro,Xd,Hd,referencia_Y(Ho,max_));
+    bala->setPos(0,referencia_Y(Ho,max_));
+    scene->update();
+    scene-> addItem(bala);
+
+
+    balaDe=new disparosDefensivos(Rd,Xd,referencia_Y(Hd,max_),Ho,3);
+    balaDe->setPos(Xd,referencia_Y(Hd,max_));
+    scene->update();
+    scene-> addItem(balaDe);
+
+
 }

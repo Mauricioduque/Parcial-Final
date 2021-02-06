@@ -13,7 +13,6 @@ disparosOfensivos::disparosOfensivos(float rdetonacion,float Xd,float Hd,float H
     Ho_=Ho;
     setFlag(ItemClipsToShape);
     sprite=QPixmap(":/imagenes/bala.png");
-
     sprite1=sprite.scaledToHeight(2*r);
     sprite2=sprite1.scaledToWidth(2*r);
     disOfensivos();
