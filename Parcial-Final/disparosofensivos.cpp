@@ -1,7 +1,9 @@
 #include "disparosofensivos.h"
 
-disparosOfensivos::disparosOfensivos(float rdetonacion,float Xd,float Hd,float Ho)
+disparosOfensivos::disparosOfensivos(float rdetonacion,float Xd,float Hd,float Ho,QGraphicsItem *parent): QGraphicsItem(parent)
 {
+
+    posSprite=0;
     x=10;
     y=Ho;
     direccion=1;
@@ -9,6 +11,11 @@ disparosOfensivos::disparosOfensivos(float rdetonacion,float Xd,float Hd,float H
     Xd_=Xd;
     Hd_=Hd;
     Ho_=Ho;
+    setFlag(ItemClipsToShape);
+    sprite=QPixmap(":/imagenes/bala.png");
+
+    sprite1=sprite.scaledToHeight(2*r);
+    sprite2=sprite1.scaledToWidth(2*r);
     disOfensivos();
     Vx=vels[0];
     w=angs[0]*(pi/180);
@@ -23,17 +30,17 @@ disparosOfensivos::disparosOfensivos(float rdetonacion,float Xd,float Hd,float H
 
 QRectF disparosOfensivos::boundingRect() const
 {
-    return QRectF(-4,-4,8,8);
+    return QRectF(0,0,2*r,2*r);
 }
 
 
 //Se grafica la bala y el sensor ofensivo
 void disparosOfensivos::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::red);
-    painter->drawEllipse(boundingRect().center(),r,r);
-    painter->setBrush(Qt::yellow);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::red);
+//    painter->drawEllipse(boundingRect().center(),r,r);
+    painter->drawPixmap(0,0, sprite2, posSprite, 0,2*r, 2*r);
+    setTransformOriginPoint(boundingRect().center());
     Q_UNUSED(widget)
     Q_UNUSED(option)
 }
@@ -84,6 +91,13 @@ void disparosOfensivos::generar_Ofensivos()
    Vy=Vy+G*t;
    x=x+Vx*t*direccion;
    setPos(x,y);
+   cont++;
+   if(cont%3==0){
+       scene()->addEllipse(x,y,2*r,2*r);
+
+   }
+
+
 
 }
 
@@ -96,6 +110,9 @@ void disparosOfensivos::ImprimirDatos(float angle, float V0, float x, float y, f
     cout<<"Impacto con posicion en Y: "<<y <<" m"<<endl;
     cout<<"Con tiempo: "<<t<<" s"<<endl<<endl;
 }
+
+
+
 
 
 

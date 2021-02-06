@@ -1,47 +1,43 @@
-#ifndef DISPAROSOFENSIVOS_H
-#define DISPAROSOFENSIVOS_H
+#ifndef DISPAROSDEFENSIVOS_H
+#define DISPAROSDEFENSIVOS_H
+
 #include <QGraphicsItem>
 #include <QPainter>
 #include <math.h>
 #include <iostream>
 #include <QTimer>
-#include <QGraphicsScene>
+#include <QThread>
 
 using namespace std;
 
-class disparosOfensivos :public QObject,public QGraphicsItem
+class disparosDefensivos :public QObject,public QGraphicsItem
 {
     Q_OBJECT
 public:
-    disparosOfensivos(float rdetonacion,float Xd,float Hd,float Ho,QGraphicsItem *parent= nullptr);
+    disparosDefensivos(float rdetonacion,float Xd,float Hd,float Ho);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,QWidget *widget);
-    void disOfensivos();
+    void disDefensivos();
     void ImprimirDatos(float angle,float V0,float x,float y,float t);
 
-
 public slots:
-    void generar_Ofensivos();
+    void generar_Defensivos();
 
 private:
     float r;     //radio;
     float Xd_=0;
-    float Hd_;
-    float Ho_=0;
+    float Hd_=0;
+    float Ho_;
     float w;
     float pi=3.1416;
     float G=9.81;
     float angs[2]={};
     float vels[2]={};
-    float Vx,Vy=0;
+    float Vx,Vy;
     float  T=0.05;
     float x,y;
+
     int direccion;
-    int cont=0;
-    QPixmap sprite;
-    QPixmap sprite1;
-    QPixmap sprite2;
-    int posSprite;
 };
 
-#endif // DISPAROSOFENSIVOS_H
+#endif // DISPAROSDEFENSIVOS_H
